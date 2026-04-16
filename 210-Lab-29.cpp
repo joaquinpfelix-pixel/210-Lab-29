@@ -17,15 +17,38 @@ const int MIN_FILES_LINES = 100;
 const string INPUT_FILE = "traffic_data.txt";
 
 // Function prototypes
-void dispalyMap(
+void displayMap(
     const map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map);
 
-void run_simulation();
+void run_simulation(
+    map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map);
 
+bool load_data(
+    map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map);
 
 int main () 
 {
+    srand(time(0));
 
+    map<string, array<list<string>, VEHICLE_TYPES>>  traffic_map;
+
+    cout << "Loading traffic data...\n";
+
+    if (!load_data(traffic_map))
+    {
+        cout << "Program terminated due to file error." << endl;
+        return 1;
+    }
+
+    cout << "Initial Traffic Map:\n";
+    displayMap(traffic_map);
+
+    run_simulation(traffic_map);
+
+    cout << "\nFINAL STATE:\n";
+    displayMap(traffic_map);
+
+    return 0;
 }
 
 void displayMap(
@@ -33,7 +56,7 @@ void displayMap(
 {
     for (auto &entry : traffic_map)
     {
-        cout << "Time Period: " << entry.first << endl;
+        cout << "Intersection: " << entry.first << endl;
 
         cout << "Cars: ";
         for (auto &v : entry.second[0])
@@ -70,9 +93,9 @@ bool load_data(
     }
 
     int count = 0;
-    stirng intersection, type, id;
+    string intersection, type, id;
 
-    while (file >> intersectiopn >> type >> id)
+    while (file >> intersection >> type >> id)
     {
         if (traffic_map.find(intersection) == traffic_map.end())
         {
@@ -105,3 +128,21 @@ bool load_data(
     return true;
 }
 
+void run_simulation(
+    map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map)
+{
+    for (int t = 0; t < TIME_PERIODS; t++)
+    {
+        cout << "Time Period: " << t << endl;
+
+        for (auto &entry : traffic_map)
+        {
+            entry.second[0].push_back("car_" + to_string(t));
+        }
+
+        if (t % 5 == 0)
+        {
+            cout << "EVENT: Traffic surge detected!" << endl;
+        }
+    }
+}
