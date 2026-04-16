@@ -11,4 +11,13 @@ The value will be a str::array containin three std::lists. These lists will repr
 3. Emergency vehicles
 Each list will store stirng representing vehicle IDs.
 
-The progam will read at least 100 lines of 
+The progam will read at least 100 lines of data from an external file to initialize the intersections.
+Each line will include an intersection name, vehicle type, and vehicle ID,
+which will be inserted into the appropriate list.
+
+Simulation Process:
+The simulation will run as a time-based system over 25 periods. During each time period: 
+
+Vehicles may arrive at intersections and be added to a list
+Vehicles may leave intersections and be removed from a list
+Random events may occur, such as traffic congestion or emergency vehicle priority
