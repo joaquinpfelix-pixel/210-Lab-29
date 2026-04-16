@@ -1,0 +1,14 @@
+Project Overview:
+This project is a discrete-event simulation that models traffic flow at multiple city intersections over time.
+The program simulates how vehicles move, accumulate, and clear out at intersections, 
+demonstrating how traffic conditions change dynamically.
+
+Implementation Details:
+The program will use a std::map to store traffic data. The key will be the name of an intersection. 
+The value will be a str::array containin three std::lists. These lists will represent:
+1. Cars
+2. Buses
+3. Emergency vehicles
+Each list will store stirng representing vehicle IDs.
+
+The progam will read at least 100 lines of 
