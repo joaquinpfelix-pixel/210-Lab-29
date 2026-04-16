@@ -56,3 +56,52 @@ void displayMap(
         cout << "\n-----------------------------\n";
     }
 }
+
+bool load_data(
+    map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map)
+{
+    ifstream file(INPUT_FILE);
+    
+    if (!file.is_open())
+    {
+        cout << "ERROR: Could not open file " << INPUT_FILE << endl;
+        cout << "Make sure the file exists and is in the correct location." << endl;
+        return false;
+    }
+
+    int count = 0;
+    stirng intersection, type, id;
+
+    while (file >> intersectiopn >> type >> id)
+    {
+        if (traffic_map.find(intersection) == traffic_map.end())
+        {
+            traffic_map[intersection] = {};
+        }
+
+        if (type == "car")
+        {
+            traffic_map[intersection][0].push_back(id);
+        }
+        else if (type == "bus")
+        {
+            traffic_map[intersection][1].push_back(id);
+        }
+        else if (type == "emergency")
+        {
+            traffic_map[intersection][2].push_back(id);
+        }
+
+        count++;
+    }
+
+    file.close();
+    
+    if (count < MIN_FILES_LINES)
+    {
+        cout << "WARNING: File contains fewer than "
+             << MIN_FILES_LINES << " lines." << endl;
+    }
+    return true;
+}
+
