@@ -133,7 +133,7 @@ void run_simulation(
 {
     for (int t = 0; t < TIME_PERIODS; t++)
     {
-        cout << "Time Period: " << t << endl;
+        cout << "Intersection: " << t << endl;
 
         for (auto &entry : traffic_map)
         {
