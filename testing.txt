@@ -7,4 +7,53 @@ For this lab, I will focus on testing the load_data() function.
 
 To test load_data(), I will verify:
 - The file opens correctly
-- Data is properly read from the file the map is populated with intersections and vehicle data
+- Data is properly read from the file
+- The map is populated with intersections and vehicle data
+- The function returns true when successful
+- The function returns false if the file cannot be opened
+
+The displayMap() function can be tested by visually checking that: 
+- All intersections are printed 
+- Cars, buses, and emergency vehicles are displayed correctly
+
+The run_simulation() function can be tested by: 
+- Verifying that time periods are printed
+- Confirming that new vehicles are added over time
+
+--------------------------------------------------
+
+#include <iostream>
+#include <string>
+#include <array>
+#include <map>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <list>
+
+using namespace std;
+
+const int VEHICLE_TYPES = 3;
+
+//Prototype
+bool load_data(map<string, array<list<string>, VEHICLE_TYPES>> & traffic_map);
+
+int main()
+{
+    map<string, array<list<string>, VEHICLE_TYPES>> traffic_map;
+
+    cout << "Testing load_data function...\n";
+
+    if (load_data(traffic_map))
+    {
+        cout << "SUCCESS: Data loaded correctly.\n";
+        cout << "Number of intersections: "
+             << traffic_map.size() << endl;
+    }
+    else
+    {
+        cout << "FAILURE: load_data failed.\n";
+    }
+
+    return 0;
+}

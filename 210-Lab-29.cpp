@@ -139,9 +139,9 @@ void run_simulation(
         {
             entry.second[0].push_back("car_" + to_string(t));
 
-            if (!entry.second[1].empty() && t % 3 == 0)
+            if (!entry.second[0].empty() && t % 3 == 0)
             {
-                entry.second[1].pop_front();
+                entry.second[0].pop_front();
             }
         }
 
