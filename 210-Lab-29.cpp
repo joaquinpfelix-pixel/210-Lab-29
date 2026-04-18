@@ -13,7 +13,7 @@ using namespace std;
 // Constants
 const int VEHICLE_TYPES = 3;
 const int TIME_PERIODS = 25;
-const int MIN_FILES_LINES = 100;
+const int MIN_FILE_LINES = 100;
 const string INPUT_FILE = "traffic_data.txt";
 
 // Function prototypes
@@ -56,7 +56,7 @@ void displayMap(
 {
     for (auto &entry : traffic_map)
     {
-        cout << "Intersection: " << entry.first << endl;
+        cout << "\nIntersection: " << entry.first << endl;
 
         cout << "Cars: ";
         for (auto &v : entry.second[0])
@@ -120,10 +120,10 @@ bool load_data(
 
     file.close();
     
-    if (count < MIN_FILES_LINES)
+    if (count < MIN_FILE_LINES)
     {
         cout << "WARNING: File contains fewer than "
-             << MIN_FILES_LINES << " lines." << endl;
+             << MIN_FILE_LINES << " lines." << endl;
     }
     return true;
 }
@@ -133,11 +133,16 @@ void run_simulation(
 {
     for (int t = 0; t < TIME_PERIODS; t++)
     {
-        cout << "Intersection: " << t << endl;
+        cout << "\n=== Time Period: " << t << endl;
 
         for (auto &entry : traffic_map)
         {
             entry.second[0].push_back("car_" + to_string(t));
+
+            if (!entry.second[1].empty() && t % 3 == 0)
+            {
+                entry.second[1].pop_front();
+            }
         }
 
         if (t % 5 == 0)

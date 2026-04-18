@@ -1,0 +1,10 @@
+This program contains several functions that require testing, including:
+- load_data()
+- displayMap()
+- run_simulation()
+
+For this lab, I will focus on testing the load_data() function.
+
+To test load_data(), I will verify:
+- The file opens correctly
+- Data is properly read from the file the map is populated with intersections and vehicle data
